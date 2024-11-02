@@ -18,36 +18,36 @@ public class CompteRestJaxRSAPI {
     @Autowired
     private CompteRepository compteRepository;
 
-    // READ: RÃ©cupÃ©rer tous les comptes (JSON et XML)
+    // READ: Retrieve all accounts (XML only)
     @Path("/comptes")
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces(MediaType.APPLICATION_XML) 
     public List<Compte> getComptes() {
         return compteRepository.findAll();
     }
 
-    // READ: RÃ©cupÃ©rer un compte par son identifiant (JSON et XML)
+    // READ: Retrieve an account by its ID (XML only)
     @Path("/comptes/{id}")
     @GET
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces(MediaType.APPLICATION_XML) 
     public Compte getCompte(@PathParam("id") Long id) {
         return compteRepository.findById(id).orElse(null);
     }
 
-    // CREATE: Ajouter un nouveau compte (JSON et XML)
+    // CREATE: Add a new account (XML only)
     @Path("/comptes")
     @POST
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Consumes(MediaType.APPLICATION_XML) 
+    @Produces(MediaType.APPLICATION_XML)
     public Compte addCompte(Compte compte) {
         return compteRepository.save(compte);
     }
 
-    // UPDATE: Mettre Ã  jour un compte existant (JSON et XML)
+    // UPDATE: Update an existing account (XML only)
     @Path("/comptes/{id}")
     @PUT
-    @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Consumes(MediaType.APPLICATION_XML)
+    @Produces(MediaType.APPLICATION_XML)
     public Compte updateCompte(@PathParam("id") Long id, Compte compte) {
         Compte existingCompte = compteRepository.findById(id).orElse(null);
         if (existingCompte != null) {
@@ -59,10 +59,10 @@ public class CompteRestJaxRSAPI {
         return null;
     }
 
-    // DELETE: Supprimer un compte (JSON et XML)
+    // DELETE: Delete an account (XML only)
     @Path("/comptes/{id}")
     @DELETE
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    @Produces(MediaType.APPLICATION_XML)
     public void deleteCompte(@PathParam("id") Long id) {
         compteRepository.deleteById(id);
     }
